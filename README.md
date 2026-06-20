@@ -30,7 +30,6 @@ The project also includes EDA Playground-ready files and text artifacts for veri
 |-- sim/                 # Multi-file simulator filelist
 |-- eda_playground/      # Paste-ready EDA Playground version
 |-- docs/                # Verification plan, testcase matrix, flow, and result artifacts
-|   `-- uvm_architecture_block.svg
 |-- .gitignore
 `-- README.md
 ```
@@ -44,21 +43,7 @@ The project also includes EDA Playground-ready files and text artifacts for veri
 | `0x8` | COUNT | Read-only | Reports current FIFO occupancy. |
 | Other | Invalid | Invalid | Access returns `PSLVERR`. |
 
-## UVM Architecture
-
-![APB FIFO UVM architecture block diagram](docs/uvm_architecture_block.svg)
-
-Transaction flow:
-
-- Sequence creates `apb_trans` items.
-- Sequencer sends items to the driver.
-- Driver converts each item into APB setup/access cycles on `apb_if`.
-- DUT responds with `prdata`, `pready`, and `pslverr`.
-- Monitor samples completed APB transfers.
-- Scoreboard checks DUT behavior against an independent FIFO model.
-- Coverage records command, address, error, FIFO count, and event coverage.
-
-Key files:
+## Key Files
 
 - `rtl/apb_fifo_slave.sv`: APB FIFO DUT.
 - `tb/top.sv`: simulation top, DUT instance, UVM startup.
@@ -72,8 +57,6 @@ Key files:
 
 - `docs/verification_plan.txt`: feature-level verification plan and pass/fail criteria.
 - `docs/testcase_matrix.txt`: testcase IDs, stimulus, expected results, checkers, and coverage mapping.
-- `docs/uvm_architecture_block.svg`: block diagram image of the UVM testbench architecture.
-- `docs/uvm_architecture.txt`: text diagram of the UVM component topology and transaction flow.
 - `docs/eda_vs_repo_layout.txt`: explains how the EDA Playground version differs from the repo layout.
 - `docs/verification_flow.txt`: repository flow, compile order, local run flow, and EDA Playground flow.
 - `docs/verification_report_template.txt`: report/slide structure for presenting the project.

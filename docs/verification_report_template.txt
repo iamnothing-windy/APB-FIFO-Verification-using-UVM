@@ -1,7 +1,7 @@
 Mau Trinh Bay Bao Cao Verification
 ==================================
 
-File nay la khung bao cao co the dung de viet report/slide cho project APB FIFO UVM. Khi viet bao cao, khong nen chi dan log dai. Nen trinh bay theo logic: bai toan -> kien truc -> plan -> testcase -> result -> ket luan.
+File nay la khung bao cao co the dung de viet report/slide cho project APB FIFO UVM. Khi viet bao cao, khong nen chi dan log dai. Nen trinh bay theo logic: bai toan -> DUT -> plan -> testcase -> result -> ket luan.
 
 1. Title Page
 -------------
@@ -36,32 +36,7 @@ Nen co bang register map:
 | others  | N/A    | Invalid  | Access returns PSLVERR.           |
 +---------+--------+----------+-----------------------------------+
 
-4. Verification Architecture
-----------------------------
-Nen trinh bay bang hoac hinh khoi:
-
-sequence -> sequencer -> driver -> APB interface -> DUT
-                                      |
-monitor ------------------------------+
-  |
-  +-> scoreboard
-  +-> coverage
-
-Giai thich ngan:
-
-- Sequence tao stimulus.
-- Driver drive APB setup/access phase.
-- Monitor sample transfer hoan tat.
-- Scoreboard giu reference FIFO model va compare voi DUT.
-- Coverage do cac scenario da duoc exercise.
-
-Co the lay so do chi tiet tu:
-
-- README.md, muc UVM Architecture
-- docs/uvm_architecture_block.svg
-- docs/uvm_architecture.txt
-
-5. Verification Plan
+4. Verification Plan
 --------------------
 Khong nen chi ghi chung chung "test FIFO". Nen dua feature va testcase mapping.
 
@@ -85,7 +60,7 @@ Dan chieu file:
 - Full plan: docs/verification_plan.txt
 - Testcase matrix: docs/testcase_matrix.txt
 
-6. Testcase Table
+5. Testcase Table
 -----------------
 Trong report nen co bang rut gon nhu sau:
 
@@ -102,7 +77,7 @@ Trong report nen co bang rut gon nhu sau:
 | TC_RAND  | Random traffic | 50 random transfers + drain | No scoreboard mismatch      |
 +----------+----------------+-----------------------------+-----------------------------+
 
-7. Checking Methodology
+6. Checking Methodology
 -----------------------
 Nen nhan manh day la self-checking testbench:
 
@@ -113,7 +88,7 @@ Nen nhan manh day la self-checking testbench:
 - STATUS/COUNT duoc tinh tu model, khong lay tu DUT.
 - Error scenarios phai co PSLVERR.
 
-8. Coverage
+7. Coverage
 -----------
 Nen trinh bay coverage intent, khong can noi la da co 100% neu chua export coverage report.
 
@@ -126,7 +101,7 @@ Coverage points implemented:
 - event: normal/overflow/underflow/invalid/read-only write
 - crosses: cmd_addr_cross, error_event_cross
 
-9. Simulation Result
+8. Simulation Result
 --------------------
 Nen dua bang tom tat thay vi paste full log:
 
@@ -146,7 +121,7 @@ Evidence file:
 
 - docs/eda_playground_xcelium_result.txt
 
-10. Notes About Simulator Messages
+9. Notes About Simulator Messages
 ----------------------------------
 Neu thay $unit_0x... trong Xcelium log, giai thich nhu sau:
 
@@ -160,13 +135,13 @@ Neu thay #1step warning:
 - #1step la SystemVerilog timing step hop le.
 - Day khong phai functional failure.
 
-11. Conclusion
+10. Conclusion
 --------------
 Example conclusion:
 
 The APB FIFO slave was verified using a UVM self-checking environment. Directed tests covered reset, normal FIFO operation, full/overflow, empty/underflow, pointer wrap-around, read-only register writes, and invalid address handling. Random mixed traffic was also included. The final Xcelium regression completed with UVM_ERROR=0, UVM_FATAL=0, and no scoreboard mismatches. Therefore, the DUT passed the defined verification plan.
 
-12. Appendix
+11. Appendix
 ------------
 Nen dua cac file/chung cu:
 
@@ -178,7 +153,5 @@ Nen dua cac file/chung cu:
 - Coverage: tb/uvm/apb_coverage.sv
 - Verification plan: docs/verification_plan.txt
 - Testcase matrix: docs/testcase_matrix.txt
-- UVM block diagram: docs/uvm_architecture_block.svg
-- UVM architecture: docs/uvm_architecture.txt
 - EDA vs repo layout: docs/eda_vs_repo_layout.txt
 - EDA result artifact: docs/eda_playground_xcelium_result.txt
