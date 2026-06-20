@@ -45,14 +45,36 @@ The project also includes EDA Playground-ready files and text artifacts for veri
 
 ## UVM Architecture
 
-```text
-sequence -> sequencer -> driver -> apb_if -> DUT
-                                      |
-monitor ------------------------------+
-  |
-  +-> scoreboard
-  +-> coverage
+```mermaid
+flowchart LR
+  TEST["apb_fifo_full_regression_test"] --> SEQ["apb_fifo_full_regression_sequence"]
+  SEQ --> SQR["apb_sequencer"]
+  SQR --> DRV["apb_driver"]
+  DRV --> VIF["virtual apb_if"]
+  VIF --> DUT["apb_fifo_slave DUT"]
+
+  DUT --> VIF
+  VIF --> MON["apb_monitor"]
+  MON --> SB["apb_scoreboard (independent FIFO model)"]
+  MON --> COV["apb_coverage (functional coverage)"]
+
+  ENV["apb_env"] --> AGENT["apb_agent"]
+  AGENT --> SQR
+  AGENT --> DRV
+  AGENT --> MON
+  ENV --> SB
+  ENV --> COV
 ```
+
+Transaction flow:
+
+- Sequence creates `apb_trans` items.
+- Sequencer sends items to the driver.
+- Driver converts each item into APB setup/access cycles on `apb_if`.
+- DUT responds with `prdata`, `pready`, and `pslverr`.
+- Monitor samples completed APB transfers.
+- Scoreboard checks DUT behavior against an independent FIFO model.
+- Coverage records command, address, error, FIFO count, and event coverage.
 
 Key files:
 
@@ -68,6 +90,7 @@ Key files:
 
 - `docs/verification_plan.txt`: feature-level verification plan and pass/fail criteria.
 - `docs/testcase_matrix.txt`: testcase IDs, stimulus, expected results, checkers, and coverage mapping.
+- `docs/uvm_architecture.txt`: text diagram of the UVM component topology and transaction flow.
 - `docs/verification_flow.txt`: repository flow, compile order, local run flow, and EDA Playground flow.
 - `docs/verification_report_template.txt`: report/slide structure for presenting the project.
 - `docs/xcelium_log_notes.txt`: notes for Xcelium messages such as `$unit_0x...` and `#1step` warnings.

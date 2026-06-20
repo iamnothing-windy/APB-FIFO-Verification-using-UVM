@@ -55,6 +55,11 @@ Giai thich ngan:
 - Scoreboard giu reference FIFO model va compare voi DUT.
 - Coverage do cac scenario da duoc exercise.
 
+Co the lay so do chi tiet tu:
+
+- README.md, muc UVM Architecture
+- docs/uvm_architecture.txt
+
 5. Verification Plan
 --------------------
 Khong nen chi ghi chung chung "test FIFO". Nen dua feature va testcase mapping.
@@ -172,4 +177,5 @@ Nen dua cac file/chung cu:
 - Coverage: tb/uvm/apb_coverage.sv
 - Verification plan: docs/verification_plan.txt
 - Testcase matrix: docs/testcase_matrix.txt
+- UVM architecture: docs/uvm_architecture.txt
 - EDA result artifact: docs/eda_playground_xcelium_result.txt

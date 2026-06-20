@@ -1,0 +1,102 @@
+APB FIFO UVM Architecture
+=========================
+
+1. Component Topology
+---------------------
+
+tb/top.sv
+  |
+  +-- apb_if
+  |     |
+  |     +-- connected to RTL DUT pins
+  |
+  +-- apb_fifo_slave DUT
+  |
+  +-- run_test("apb_fifo_full_regression_test")
+
+UVM tree
+--------
+
+uvm_test_top: apb_fifo_full_regression_test
+  |
+  +-- env: apb_env
+        |
+        +-- agent: apb_agent
+        |     |
+        |     +-- sequencer: apb_sequencer
+        |     +-- driver   : apb_driver
+        |     +-- monitor  : apb_monitor
+        |
+        +-- scoreboard: apb_scoreboard
+        +-- coverage  : apb_coverage
+
+2. Transaction Flow
+-------------------
+
+Directed/random sequence
+  |
+  | creates apb_trans items
+  v
+apb_sequencer
+  |
+  | sends sequence items
+  v
+apb_driver
+  |
+  | drives APB setup/access cycles
+  v
+virtual apb_if
+  |
+  | psel, penable, pwrite, paddr, pwdata
+  v
+apb_fifo_slave DUT
+  |
+  | prdata, pready, pslverr
+  v
+virtual apb_if
+  |
+  | sampled by monitor
+  v
+apb_monitor
+  |
+  +-- analysis port --> apb_scoreboard
+  |
+  +-- analysis port --> apb_coverage
+
+3. Checking Path
+----------------
+
+apb_monitor
+  |
+  | completed APB transfer
+  v
+apb_scoreboard
+  |
+  +-- keeps expected_fifo[$] as independent reference model
+  +-- pushes expected data on valid DATA writes
+  +-- pops and compares expected data on valid DATA reads
+  +-- computes expected STATUS from model state
+  +-- computes expected COUNT from model size
+  +-- expects PSLVERR for overflow, underflow, read-only writes, and invalid addresses
+
+4. Coverage Path
+----------------
+
+apb_monitor
+  |
+  | completed APB transfer
+  v
+apb_coverage
+  |
+  +-- cmd_cp: read/write
+  +-- addr_cp: DATA/STATUS/COUNT/invalid
+  +-- slverr_cp: normal/error response
+  +-- count_cp: empty/partial/full
+  +-- event_cp: normal/overflow/underflow/invalid/read-only write
+  +-- cmd_addr_cross
+  +-- error_event_cross
+
+5. Important Separation
+-----------------------
+
+The scoreboard does not reuse DUT internal state. It builds an expected FIFO model only from observed APB transactions. This makes the testbench self-checking instead of relying on manual log inspection.
