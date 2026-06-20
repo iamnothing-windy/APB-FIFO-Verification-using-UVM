@@ -1,0 +1,85 @@
+APB FIFO Testcase Matrix
+========================
+
+This file lists the actual verification cases. Each testcase has a purpose, stimulus, expected result, checker, and coverage target.
+
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC ID    | Test/sequence                  | Purpose                     | Main stimulus               | Expected result          |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_RESET | apb_fifo_reset_check_sequence  | Check reset/default state.  | Read STATUS, read COUNT.    | STATUS empty=1, COUNT=0, |
+|          |                               |                             |                             | no PSLVERR.              |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_BASIC | apb_fifo_basic_sequence        | Check normal FIFO behavior. | Write 0x11, 0x22, 0x33 to   | COUNT=3 after writes.    |
+|          |                               |                             | DATA, read COUNT/STATUS,    | Reads return 0x11,       |
+|          |                               |                             | then read DATA three times. | 0x22, 0x33 in order.     |
+|          |                               |                             |                             | Final STATUS empty=1.    |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_FULL  | apb_fifo_full_overflow_sequence| Check full and overflow.    | Write FIFO_DEPTH values     | STATUS full=1, COUNT=8.  |
+|          |                               |                             | 0xA0 to 0xA7, read STATUS,  | Extra write returns      |
+|          |                               |                             | read COUNT, then write      | PSLVERR. Draining reads  |
+|          |                               |                             | extra 0x5A.                 | 0xA0 to 0xA7 in order.   |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_UNDER | apb_fifo_underflow_sequence    | Check empty read behavior.  | Read DATA while FIFO empty. | Read returns PSLVERR and |
+|          |                               |                             | Read STATUS and COUNT.      | PRDATA=0. STATUS empty=1,|
+|          |                               |                             |                             | COUNT=0.                 |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_WRAP  | apb_fifo_wrap_sequence         | Check FIFO pointer wrap.    | Write 5 values 0xD0-0xD4,  | Data order remains       |
+|          |                               |                             | read 3 values, write 6      | correct across wrap:     |
+|          |                               |                             | values 0xE0-0xE5, read all. | 0xD3, 0xD4, 0xE0-0xE5.  |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_RO    | apb_fifo_register_sequence     | Check read-only registers.  | Write STATUS with 0x55 and  | Both writes return       |
+|          |                               |                             | COUNT with 0x66, then read  | PSLVERR. Later reads     |
+|          |                               |                             | STATUS/COUNT.               | remain valid.            |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_INV   | apb_fifo_invalid_addr_sequence | Check invalid addresses.    | Write/read 0xC and 0xF.     | Invalid reads/writes     |
+|          |                               |                             |                             | return PSLVERR. Invalid  |
+|          |                               |                             |                             | read data is 0.          |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_RAND  | apb_fifo_random_sequence       | Stress mixed traffic.       | 50 randomized APB transfers | Scoreboard model remains |
+|          |                               |                             | plus final FIFO drain and   | matched. Final drain     |
+|          |                               |                             | status/count reads.         | reaches empty state.     |
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+| TC_REG   | apb_fifo_full_regression_test  | Full regression.            | Runs all major directed     | No scoreboard mismatch,  |
+|          |                               |                             | sequences and random test.  | UVM_ERROR=0, UVM_FATAL=0.|
++----------+-------------------------------+-----------------------------+-----------------------------+--------------------------+
+
+Checker Mapping
+---------------
++----------+-------------------------------+----------------------------------------------+
+| TC ID    | Checker                       | What is checked                              |
++----------+-------------------------------+----------------------------------------------+
+| TC_RESET | apb_scoreboard                | STATUS and COUNT after reset.                |
+| TC_BASIC | apb_scoreboard                | FIFO order, COUNT, STATUS, no PSLVERR.       |
+| TC_FULL  | apb_scoreboard                | Full flag, count=8, overflow PSLVERR, order. |
+| TC_UNDER | apb_scoreboard                | Underflow PSLVERR and zero read data.        |
+| TC_WRAP  | apb_scoreboard                | FIFO order after pointer wrap.               |
+| TC_RO    | apb_scoreboard                | PSLVERR on write to read-only registers.     |
+| TC_INV   | apb_scoreboard                | PSLVERR on invalid addresses and PRDATA=0.   |
+| TC_RAND  | apb_scoreboard                | Continuous model-vs-DUT comparison.          |
+| All      | tb/apb_if.sv assertions       | APB setup/access protocol rules.             |
++----------+-------------------------------+----------------------------------------------+
+
+Coverage Mapping
+----------------
++----------+-------------------------------+----------------------------------------------+
+| TC ID    | Main coverage bins            | Coverage intent                              |
++----------+-------------------------------+----------------------------------------------+
+| TC_RESET | addr STATUS/COUNT, empty      | Reset-visible register state.                |
+| TC_BASIC | read/write, DATA, partial     | Normal traffic and partial count state.      |
+| TC_FULL  | full, overflow, slverr=1      | Boundary full condition and error response.  |
+| TC_UNDER | empty, underflow, slverr=1    | Empty boundary and error response.           |
+| TC_WRAP  | DATA read/write, full/partial | Pointer wrap with valid traffic.             |
+| TC_RO    | STATUS/COUNT write, slverr=1  | Read-only protection.                        |
+| TC_INV   | invalid address, slverr=1     | Invalid address handling.                    |
+| TC_RAND  | cmd_addr_cross, event cross   | Broader mixed scenario coverage.             |
++----------+-------------------------------+----------------------------------------------+
+
+Current Regression Evidence
+---------------------------
+The EDA Playground/Xcelium run recorded in docs/eda_playground_xcelium_result.txt shows:
+
+- Test run: apb_fifo_full_regression_test
+- Scoreboard completed with no mismatches
+- UVM_WARNING: 0
+- UVM_ERROR: 0
+- UVM_FATAL: 0

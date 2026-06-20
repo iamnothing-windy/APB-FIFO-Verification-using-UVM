@@ -1,0 +1,47 @@
+Xcelium Log Notes
+=================
+
+What is $unit_0x67f934e9?
+-------------------------
+$unit is the SystemVerilog compilation-unit scope. It is not a real module, not an extra DUT, and not a bug by itself.
+
+Cadence Xcelium prints a generated name such as $unit_0x67f934e9 when a compile unit contains declarations/imports/includes that live outside a named module/interface/program/package. The hexadecimal suffix is an internal simulator identifier/hash.
+
+In the EDA Playground transcript, Xcelium reported these top-level design units:
+
+- uvm_pkg
+- apb_fifo_pkg
+- $unit_0x67f934e9
+- top
+
+Meaning:
+
+- uvm_pkg is the UVM library package.
+- apb_fifo_pkg is this project's UVM package.
+- top is the real simulation top module.
+- $unit_0x67f934e9 is Xcelium's generated name for compilation-unit-scope content.
+
+This is normal for SystemVerilog simulations, especially when using EDA Playground single-file/paste-ready testbenches. If the simulation has UVM_ERROR=0 and UVM_FATAL=0, this line is informational and does not indicate failure.
+
+How to reduce $unit noise
+-------------------------
+- Keep classes, typedefs, functions, and parameters inside packages when possible.
+- Compile packages before modules that import them.
+- Keep the top-level module/interface declarations clean and named.
+- On EDA Playground, one $unit entry may still appear because the platform compiles pasted code as a compilation unit.
+
+What is the #1step warning?
+---------------------------
+The warning is:
+
+xmvlog: *W,SAWSTP: Time unit "step" seen in literal - using local precision.
+
+It points to clocking block skew declarations:
+
+default input #1step output #1step;
+
+In SystemVerilog, 1step means the smallest time precision of the current scope. With `timescale 1ns/1ps, that means 1 ps. This is commonly used in clocking blocks to sample just before a clock edge and drive just after the edge.
+
+The warning is not a functional failure. It only says Xcelium is resolving step using the local time precision.
+
+If the warning must be silenced, the clocking block skew can be changed to an explicit precision such as #1ps, but #1step is valid SystemVerilog and portable for clocking-block intent.

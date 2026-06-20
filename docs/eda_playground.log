@@ -1,0 +1,329 @@
+[2026-06-20 17:05:45 UTC] xrun -Q -unbuffered '-timescale' '1ns/1ns' '-sysv' '-top' 'top' -uvmnocdnsextra -uvmhome $UVM_HOME $UVM_HOME/src/uvm_macros.svh design.sv testbench.sv
+TOOL:	xrun	25.03-s001: Started on Jun 20, 2026 at 13:05:45 EDT
+xrun: 25.03-s001: (c) Copyright 1995-2025 Cadence Design Systems, Inc.
+    default input #1step output #1step;
+                                     |
+xmvlog: *W,SAWSTP (testbench.sv,30|37): Time unit "step" seen in literal - using local precision.
+    default input #1step output #1step;
+                                     |
+xmvlog: *W,SAWSTP (testbench.sv,42|37): Time unit "step" seen in literal - using local precision.
+	Top level design units:
+		uvm_pkg
+		apb_fifo_pkg
+		$unit_0x67f934e9
+		top
+Loading snapshot worklib.top:sv .................... Done
+SVSEED default: 1
+xcelium> source /xcelium25.03/tools/xcelium/files/xmsimrc
+xcelium> source /xcelium25.03/tools//methodology/UVM/CDNS-1.2/sv/files/tcl/uvm_sim.tcl
+xcelium> run
+UVM_INFO /xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh(412) @ 0: reporter [UVM/RELNOTES]
+----------------------------------------------------------------
+CDNS-UVM-1.2 (25.03-s001)
+(C) 2007-2014 Mentor Graphics Corporation
+(C) 2007-2014 Cadence Design Systems, Inc.
+(C) 2006-2014 Synopsys, Inc.
+(C) 2011-2013 Cypress Semiconductor Corp.
+(C) 2013-2014 NVIDIA Corporation
+----------------------------------------------------------------
+
+  ***********       IMPORTANT RELEASE NOTES         ************
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_NO_DEPRECATED undefined.
+  See http://www.eda.org/svdb/view.php?id=3313 for more details.
+
+  You are using a version of the UVM library that has been compiled
+  with `UVM_OBJECT_DO_NOT_NEED_CONSTRUCTOR undefined.
+  See http://www.eda.org/svdb/view.php?id=3770 for more details.
+
+      (Specify +UVM_NO_RELNOTES to turn off this notice)
+
+UVM_INFO @ 0: reporter [RNTST] Running test apb_fifo_full_regression_test...
+UVM_INFO testbench.sv(482) @ 75000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 75000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 105000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 105000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 135000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x11 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 135000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x11 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 165000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x22 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 165000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x22 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 195000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x33 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 195000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x33 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 225000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x3 slverr=0
+UVM_INFO testbench.sv(440) @ 225000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x3 slverr=0
+UVM_INFO testbench.sv(482) @ 255000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 255000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 285000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x11 slverr=0
+UVM_INFO testbench.sv(440) @ 285000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x11 slverr=0
+UVM_INFO testbench.sv(482) @ 315000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x22 slverr=0
+UVM_INFO testbench.sv(440) @ 315000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x22 slverr=0
+UVM_INFO testbench.sv(482) @ 345000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x33 slverr=0
+UVM_INFO testbench.sv(440) @ 345000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x33 slverr=0
+UVM_INFO testbench.sv(482) @ 375000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 375000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 405000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 405000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 435000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 435000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 465000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa1 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 465000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa1 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 495000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 495000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 525000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa3 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 525000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa3 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 555000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa4 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 555000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa4 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 585000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa5 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 585000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa5 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 615000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa6 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 615000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa6 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 645000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xa7 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 645000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xa7 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 675000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x2 slverr=0
+UVM_INFO testbench.sv(440) @ 675000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x2 slverr=0
+UVM_INFO testbench.sv(482) @ 705000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x8 slverr=0
+UVM_INFO testbench.sv(440) @ 705000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x8 slverr=0
+UVM_INFO testbench.sv(482) @ 735000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x5a rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 735000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x5a rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 765000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa0 slverr=0
+UVM_INFO testbench.sv(440) @ 765000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa0 slverr=0
+UVM_INFO testbench.sv(482) @ 795000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa1 slverr=0
+UVM_INFO testbench.sv(440) @ 795000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa1 slverr=0
+UVM_INFO testbench.sv(482) @ 825000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa2 slverr=0
+UVM_INFO testbench.sv(440) @ 825000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa2 slverr=0
+UVM_INFO testbench.sv(482) @ 855000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa3 slverr=0
+UVM_INFO testbench.sv(440) @ 855000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa3 slverr=0
+UVM_INFO testbench.sv(482) @ 885000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa4 slverr=0
+UVM_INFO testbench.sv(440) @ 885000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa4 slverr=0
+UVM_INFO testbench.sv(482) @ 915000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa5 slverr=0
+UVM_INFO testbench.sv(440) @ 915000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa5 slverr=0
+UVM_INFO testbench.sv(482) @ 945000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa6 slverr=0
+UVM_INFO testbench.sv(440) @ 945000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa6 slverr=0
+UVM_INFO testbench.sv(482) @ 975000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xa7 slverr=0
+UVM_INFO testbench.sv(440) @ 975000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xa7 slverr=0
+UVM_INFO testbench.sv(482) @ 1005000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 1005000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 1035000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1035000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1065000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 1065000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 1095000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 1095000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 1125000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1125000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1155000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xd0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1155000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xd0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1185000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xd1 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1185000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xd1 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1215000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xd2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1215000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xd2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1245000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xd3 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1245000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xd3 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1275000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xd4 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1275000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xd4 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1305000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xd0 slverr=0
+UVM_INFO testbench.sv(440) @ 1305000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xd0 slverr=0
+UVM_INFO testbench.sv(482) @ 1335000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xd1 slverr=0
+UVM_INFO testbench.sv(440) @ 1335000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xd1 slverr=0
+UVM_INFO testbench.sv(482) @ 1365000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xd2 slverr=0
+UVM_INFO testbench.sv(440) @ 1365000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xd2 slverr=0
+UVM_INFO testbench.sv(482) @ 1395000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xe0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1395000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xe0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1425000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xe1 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1425000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xe1 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1455000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xe2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1455000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xe2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1485000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xe3 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1485000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xe3 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1515000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xe4 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1515000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xe4 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1545000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xe5 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1545000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xe5 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1575000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x2 slverr=0
+UVM_INFO testbench.sv(440) @ 1575000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x2 slverr=0
+UVM_INFO testbench.sv(482) @ 1605000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x8 slverr=0
+UVM_INFO testbench.sv(440) @ 1605000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x8 slverr=0
+UVM_INFO testbench.sv(482) @ 1635000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xd3 slverr=0
+UVM_INFO testbench.sv(440) @ 1635000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xd3 slverr=0
+UVM_INFO testbench.sv(482) @ 1665000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xd4 slverr=0
+UVM_INFO testbench.sv(440) @ 1665000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xd4 slverr=0
+UVM_INFO testbench.sv(482) @ 1695000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xe0 slverr=0
+UVM_INFO testbench.sv(440) @ 1695000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xe0 slverr=0
+UVM_INFO testbench.sv(482) @ 1725000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xe1 slverr=0
+UVM_INFO testbench.sv(440) @ 1725000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xe1 slverr=0
+UVM_INFO testbench.sv(482) @ 1755000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xe2 slverr=0
+UVM_INFO testbench.sv(440) @ 1755000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xe2 slverr=0
+UVM_INFO testbench.sv(482) @ 1785000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xe3 slverr=0
+UVM_INFO testbench.sv(440) @ 1785000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xe3 slverr=0
+UVM_INFO testbench.sv(482) @ 1815000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xe4 slverr=0
+UVM_INFO testbench.sv(440) @ 1815000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xe4 slverr=0
+UVM_INFO testbench.sv(482) @ 1845000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0xe5 slverr=0
+UVM_INFO testbench.sv(440) @ 1845000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0xe5 slverr=0
+UVM_INFO testbench.sv(482) @ 1875000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 1875000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 1905000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 1905000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 1935000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x4 data=0x55 rdata=0x1 slverr=1
+UVM_INFO testbench.sv(440) @ 1935000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x4 data=0x55 rdata=0x1 slverr=1
+UVM_INFO testbench.sv(482) @ 1965000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x8 data=0x66 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 1965000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x8 data=0x66 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 1995000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 1995000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 2025000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2025000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2055000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xc data=0x77 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2055000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xc data=0x77 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2085000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0xc data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2085000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0xc data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2115000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xf data=0x88 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2115000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xf data=0x88 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2145000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0xf data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2145000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0xf data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2175000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xf data=0xe7 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2175000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xf data=0xe7 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2205000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x94 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2205000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x94 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2235000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0xf data=0xee rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2235000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0xf data=0xee rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2265000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0xd2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2265000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0xd2 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2295000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x8d rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2295000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x8d rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2325000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x4 data=0x8b rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2325000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x4 data=0x8b rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2355000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x4 data=0xa2 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2355000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x4 data=0xa2 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2385000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x84 rdata=0x94 slverr=0
+UVM_INFO testbench.sv(440) @ 2385000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x84 rdata=0x94 slverr=0
+UVM_INFO testbench.sv(482) @ 2415000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x20 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2415000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x20 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2445000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0xf3 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2445000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0xf3 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2475000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x94 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 2475000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x94 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 2505000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0xd2 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2505000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0xd2 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2535000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xcf rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2535000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xcf rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2565000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x18 rdata=0xcf slverr=0
+UVM_INFO testbench.sv(440) @ 2565000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x18 rdata=0xcf slverr=0
+UVM_INFO testbench.sv(482) @ 2595000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0xc data=0x4a rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2595000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0xc data=0x4a rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2625000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x9e rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2625000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x9e rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2655000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x7 rdata=0x9e slverr=0
+UVM_INFO testbench.sv(440) @ 2655000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x7 rdata=0x9e slverr=0
+UVM_INFO testbench.sv(482) @ 2685000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0xd8 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2685000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0xd8 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2715000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x89 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2715000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x89 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2745000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x8 data=0xc1 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2745000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x8 data=0xc1 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2775000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xf data=0x1f rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2775000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xf data=0x1f rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2805000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xe5 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2805000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xe5 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2835000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0xcd rdata=0xe5 slverr=0
+UVM_INFO testbench.sv(440) @ 2835000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0xcd rdata=0xe5 slverr=0
+UVM_INFO testbench.sv(482) @ 2865000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xf data=0xb0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2865000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xf data=0xb0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2895000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x7e rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 2895000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x7e rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 2925000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0xc data=0x3 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2925000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0xc data=0x3 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2955000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xc data=0x93 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2955000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xc data=0x93 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 2985000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0xc data=0xcc rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 2985000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0xc data=0xcc rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3015000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x90 rdata=0x7e slverr=0
+UVM_INFO testbench.sv(440) @ 3015000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x90 rdata=0x7e slverr=0
+UVM_INFO testbench.sv(482) @ 3045000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0xc data=0x6c rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3045000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0xc data=0x6c rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3075000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x4 data=0x82 rdata=0x1 slverr=1
+UVM_INFO testbench.sv(440) @ 3075000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x4 data=0x82 rdata=0x1 slverr=1
+UVM_INFO testbench.sv(482) @ 3105000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x4 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3105000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x4 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3135000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0xdf rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 3135000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0xdf rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 3165000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x4d rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 3165000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x4d rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 3195000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xc data=0xf rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3195000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xc data=0xf rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3225000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x8 data=0x20 rdata=0x2 slverr=1
+UVM_INFO testbench.sv(440) @ 3225000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x8 data=0x20 rdata=0x2 slverr=1
+UVM_INFO testbench.sv(482) @ 3255000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x4 data=0x3e rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3255000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x4 data=0x3e rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3285000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x8 data=0x5e rdata=0x2 slverr=1
+UVM_INFO testbench.sv(440) @ 3285000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x8 data=0x5e rdata=0x2 slverr=1
+UVM_INFO testbench.sv(482) @ 3315000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0xf1 rdata=0x2 slverr=0
+UVM_INFO testbench.sv(440) @ 3315000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0xf1 rdata=0x2 slverr=0
+UVM_INFO testbench.sv(482) @ 3345000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x4c rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 3345000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x4c rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 3375000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0xc data=0xf1 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3375000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0xc data=0xf1 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3405000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x6f rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 3405000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x6f rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 3435000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x4 data=0xc5 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3435000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x4 data=0xc5 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3465000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0xba rdata=0xdf slverr=0
+UVM_INFO testbench.sv(440) @ 3465000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0xba rdata=0xdf slverr=0
+UVM_INFO testbench.sv(482) @ 3495000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0xec rdata=0x4d slverr=0
+UVM_INFO testbench.sv(440) @ 3495000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0xec rdata=0x4d slverr=0
+UVM_INFO testbench.sv(482) @ 3525000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x30 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 3525000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x30 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 3555000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x8 data=0xe rdata=0x3 slverr=1
+UVM_INFO testbench.sv(440) @ 3555000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x8 data=0xe rdata=0x3 slverr=1
+UVM_INFO testbench.sv(482) @ 3585000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x4 data=0x69 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3585000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x4 data=0x69 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3615000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x0 data=0x10 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 3615000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x0 data=0x10 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(482) @ 3645000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd=WRITE addr=0x8 data=0x77 rdata=0x4 slverr=1
+UVM_INFO testbench.sv(440) @ 3645000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd=WRITE addr=0x8 data=0x77 rdata=0x4 slverr=1
+UVM_INFO testbench.sv(482) @ 3675000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x4c slverr=0
+UVM_INFO testbench.sv(440) @ 3675000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x4c slverr=0
+UVM_INFO testbench.sv(482) @ 3705000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x6f slverr=0
+UVM_INFO testbench.sv(440) @ 3705000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x6f slverr=0
+UVM_INFO testbench.sv(482) @ 3735000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x30 slverr=0
+UVM_INFO testbench.sv(440) @ 3735000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x30 slverr=0
+UVM_INFO testbench.sv(482) @ 3765000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x10 slverr=0
+UVM_INFO testbench.sv(440) @ 3765000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x10 slverr=0
+UVM_INFO testbench.sv(482) @ 3795000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3795000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3825000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3825000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3855000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3855000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3885000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3885000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3915000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3915000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3945000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(440) @ 3945000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x0 data=0x0 rdata=0x0 slverr=1
+UVM_INFO testbench.sv(482) @ 3975000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(440) @ 3975000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x4 data=0x0 rdata=0x1 slverr=0
+UVM_INFO testbench.sv(482) @ 4005000: uvm_test_top.env.agent.monitor [APB_MON] Observed cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO testbench.sv(440) @ 4005000: uvm_test_top.env.agent.driver [APB_DRV] Drove cmd= READ addr=0x8 data=0x0 rdata=0x0 slverr=0
+UVM_INFO /xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_objection.svh(1271) @ 4025000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+UVM_INFO testbench.sv(562) @ 4025000: uvm_test_top.env.scoreboard [APB_SB] Scoreboard completed with no mismatches
+UVM_INFO /xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_report_server.svh(851) @ 4025000: reporter [UVM/REPORT/SERVER]
+--- UVM Report Summary ---
+
+** Report counts by severity
+UVM_INFO :  268
+UVM_WARNING :    0
+UVM_ERROR :    0
+UVM_FATAL :    0
+** Report counts by id
+[APB_DRV]   132
+[APB_MON]   132
+[APB_SB]     1
+[RNTST]     1
+[TEST_DONE]     1
+[UVM/RELNOTES]     1
+
+Simulation complete via $finish(1) at time 4025 NS + 59
+/xcelium25.03/tools/methodology/UVM/CDNS-1.2/sv/src/base/uvm_root.svh:543     $finish;
+xcelium> exit
+TOOL:	xrun	25.03-s001: Exiting on Jun 20, 2026 at 13:05:55 EDT  (total: 00:00:10)
+Done

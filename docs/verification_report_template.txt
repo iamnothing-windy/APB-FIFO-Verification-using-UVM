@@ -1,0 +1,175 @@
+Mau Trinh Bay Bao Cao Verification
+==================================
+
+File nay la khung bao cao co the dung de viet report/slide cho project APB FIFO UVM. Khi viet bao cao, khong nen chi dan log dai. Nen trinh bay theo logic: bai toan -> kien truc -> plan -> testcase -> result -> ket luan.
+
+1. Title Page
+-------------
+- Project: APB FIFO Verification using UVM
+- DUT: APB FIFO Slave
+- Simulator: Cadence Xcelium on EDA Playground
+- Test: apb_fifo_full_regression_test
+- Author / class / date
+
+2. Introduction
+---------------
+Noi dung nen viet:
+
+- Muc tieu project la xay dung moi truong UVM de verify APB FIFO slave.
+- DUT ho tro ghi/doc DATA, doc STATUS, doc COUNT, bao loi overflow/underflow/invalid/read-only write.
+- Ket qua mong doi la simulation tu check bang scoreboard, khong can doc log thu cong.
+
+Example paragraph:
+
+This project verifies an APB FIFO slave using a UVM-based self-checking testbench. The verification environment checks normal FIFO operation, register behavior, boundary conditions, and error responses. The final regression was run on EDA Playground with Cadence Xcelium and completed with no UVM errors or scoreboard mismatches.
+
+3. DUT Description
+------------------
+Nen co bang register map:
+
++---------+--------+----------+-----------------------------------+
+| Address | Name   | Access   | Description                       |
++---------+--------+----------+-----------------------------------+
+| 0x0     | DATA   | R/W      | Write push, read pop FIFO data.   |
+| 0x4     | STATUS | Read-only| bit0 empty, bit1 full.            |
+| 0x8     | COUNT  | Read-only| FIFO occupancy count.             |
+| others  | N/A    | Invalid  | Access returns PSLVERR.           |
++---------+--------+----------+-----------------------------------+
+
+4. Verification Architecture
+----------------------------
+Nen trinh bay bang hoac hinh khoi:
+
+sequence -> sequencer -> driver -> APB interface -> DUT
+                                      |
+monitor ------------------------------+
+  |
+  +-> scoreboard
+  +-> coverage
+
+Giai thich ngan:
+
+- Sequence tao stimulus.
+- Driver drive APB setup/access phase.
+- Monitor sample transfer hoan tat.
+- Scoreboard giu reference FIFO model va compare voi DUT.
+- Coverage do cac scenario da duoc exercise.
+
+5. Verification Plan
+--------------------
+Khong nen chi ghi chung chung "test FIFO". Nen dua feature va testcase mapping.
+
+Feature summary:
+
+- Reset state
+- DATA write/read
+- FIFO ordering
+- STATUS empty/full
+- COUNT occupancy
+- Full/overflow
+- Empty/underflow
+- Pointer wrap-around
+- Read-only register protection
+- Invalid address handling
+- Random mixed traffic
+- APB protocol sequencing
+
+Dan chieu file:
+
+- Full plan: docs/verification_plan.txt
+- Testcase matrix: docs/testcase_matrix.txt
+
+6. Testcase Table
+-----------------
+Trong report nen co bang rut gon nhu sau:
+
++----------+----------------+-----------------------------+-----------------------------+
+| TC ID    | Scenario       | Stimulus                    | Expected result             |
++----------+----------------+-----------------------------+-----------------------------+
+| TC_RESET | Reset state    | Read STATUS/COUNT           | empty=1, count=0            |
+| TC_BASIC | Basic FIFO     | Write 0x11/22/33 then read  | Read same order             |
+| TC_FULL  | Full/overflow  | Fill 8 entries, extra write | full=1, count=8, PSLVERR    |
+| TC_UNDER | Underflow      | Read empty FIFO             | PSLVERR, PRDATA=0           |
+| TC_WRAP  | Pointer wrap   | Read/write around boundary  | FIFO order remains correct  |
+| TC_RO    | Read-only regs | Write STATUS/COUNT          | PSLVERR                     |
+| TC_INV   | Invalid addr   | Access 0xC/0xF              | PSLVERR                     |
+| TC_RAND  | Random traffic | 50 random transfers + drain | No scoreboard mismatch      |
++----------+----------------+-----------------------------+-----------------------------+
+
+7. Checking Methodology
+-----------------------
+Nen nhan manh day la self-checking testbench:
+
+- Scoreboard khong copy output DUT lam expected.
+- Scoreboard co FIFO model doc lap expected_fifo[$].
+- Khi write DATA hop le, model push_back(data).
+- Khi read DATA hop le, model pop_front() va compare voi PRDATA.
+- STATUS/COUNT duoc tinh tu model, khong lay tu DUT.
+- Error scenarios phai co PSLVERR.
+
+8. Coverage
+-----------
+Nen trinh bay coverage intent, khong can noi la da co 100% neu chua export coverage report.
+
+Coverage points implemented:
+
+- command: read/write
+- address: DATA/STATUS/COUNT/invalid
+- slverr: no_error/error
+- FIFO count state: empty/partial/full
+- event: normal/overflow/underflow/invalid/read-only write
+- crosses: cmd_addr_cross, error_event_cross
+
+9. Simulation Result
+--------------------
+Nen dua bang tom tat thay vi paste full log:
+
++----------------+------------------------------------------+
+| Item           | Result                                   |
++----------------+------------------------------------------+
+| Simulator      | Cadence Xcelium 25.03-s001               |
+| Test           | apb_fifo_full_regression_test            |
+| Scoreboard     | Scoreboard completed with no mismatches  |
+| UVM_WARNING    | 0                                        |
+| UVM_ERROR      | 0                                        |
+| UVM_FATAL      | 0                                        |
+| Final status   | PASS                                     |
++----------------+------------------------------------------+
+
+Evidence file:
+
+- docs/eda_playground_xcelium_result.txt
+
+10. Notes About Simulator Messages
+----------------------------------
+Neu thay $unit_0x... trong Xcelium log, giai thich nhu sau:
+
+- $unit_0x67f934e9 la compilation-unit scope do simulator tu sinh.
+- No khong phai module DUT va khong phai loi.
+- Top simulation that su van la top.
+
+Neu thay #1step warning:
+
+- Warning den tu clocking block skew default input #1step output #1step.
+- #1step la SystemVerilog timing step hop le.
+- Day khong phai functional failure.
+
+11. Conclusion
+--------------
+Example conclusion:
+
+The APB FIFO slave was verified using a UVM self-checking environment. Directed tests covered reset, normal FIFO operation, full/overflow, empty/underflow, pointer wrap-around, read-only register writes, and invalid address handling. Random mixed traffic was also included. The final Xcelium regression completed with UVM_ERROR=0, UVM_FATAL=0, and no scoreboard mismatches. Therefore, the DUT passed the defined verification plan.
+
+12. Appendix
+------------
+Nen dua cac file/chung cu:
+
+- RTL: rtl/apb_fifo_slave.sv
+- UVM package: tb/uvm/apb_fifo_pkg.sv
+- Test sequences: tb/uvm/apb_sequence.sv
+- Tests: tb/uvm/apb_test.sv
+- Scoreboard: tb/uvm/apb_scoreboard.sv
+- Coverage: tb/uvm/apb_coverage.sv
+- Verification plan: docs/verification_plan.txt
+- Testcase matrix: docs/testcase_matrix.txt
+- EDA result artifact: docs/eda_playground_xcelium_result.txt

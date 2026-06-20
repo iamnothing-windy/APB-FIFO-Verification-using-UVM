@@ -1,0 +1,43 @@
+# Simulator build/output directories
+xcelium.d/
+INCA_libs/
+work/
+worklib/
+simv.daidir/
+csrc/
+DVEfiles/
+urgReport/
+waves/
+
+# Simulator executables and generated databases
+simv
+*.vdb
+*.ucdb
+*.wlf
+
+# Waveforms
+*.vcd
+*.vpd
+*.fsdb
+*.fst
+*.shm/
+
+# Logs, journals, and temporary simulator files
+*.log
+!docs/eda_playground.log
+*.jou
+*.key
+*.history
+xrun.history
+xrun.key
+xrun.log
+transcript
+docs/local_*_result.txt
+
+# Editor and OS noise
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store

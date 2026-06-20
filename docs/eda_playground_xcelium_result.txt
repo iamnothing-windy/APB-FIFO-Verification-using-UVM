@@ -1,0 +1,65 @@
+EDA Playground Xcelium Result Artifact
+======================================
+
+Source
+------
+- Platform: EDA Playground
+- Simulator: Cadence Xcelium xrun 25.03-s001
+- UVM: CDNS-UVM-1.2
+- Testbench file shown by simulator: testbench.sv
+- Test run: apb_fifo_full_regression_test
+- Transcript exit time: Jun 20, 2026 at 13:05:55 EDT
+
+Compile/Elaboration Evidence
+----------------------------
+Top level design units reported by Xcelium:
+
+- uvm_pkg
+- apb_fifo_pkg
+- $unit_0x67f934e9
+- top
+
+Warnings observed:
+
+- xmvlog: *W,SAWSTP (testbench.sv,30|37): Time unit "step" seen in literal - using local precision.
+- xmvlog: *W,SAWSTP (testbench.sv,42|37): Time unit "step" seen in literal - using local precision.
+
+These warnings come from clocking block skew declarations using #1step. They are not UVM errors and did not fail the run.
+
+Run Evidence
+------------
+The transcript shows the intended regression test started:
+
+UVM_INFO @ 0: reporter [RNTST] Running test apb_fifo_full_regression_test...
+
+The monitor and driver reported APB read/write activity across reset checks, basic FIFO traffic, full/overflow, underflow, wrap-around, read-only register writes, invalid-address accesses, and random mixed traffic.
+
+The scoreboard completed cleanly:
+
+UVM_INFO testbench.sv(562) @ 4025000: uvm_test_top.env.scoreboard [APB_SB] Scoreboard completed with no mismatches
+
+UVM Report Summary
+------------------
+Report counts by severity:
+
+- UVM_INFO    : 268
+- UVM_WARNING : 0
+- UVM_ERROR   : 0
+- UVM_FATAL   : 0
+
+Report counts by id:
+
+- APB_DRV       : 132
+- APB_MON       : 132
+- APB_SB        : 1
+- RNTST         : 1
+- TEST_DONE     : 1
+- UVM/RELNOTES  : 1
+
+Completion
+----------
+Simulation completed via $finish at time 4025 NS + 59.
+
+Conclusion
+----------
+PASS. The EDA Playground Xcelium run completed apb_fifo_full_regression_test with no scoreboard mismatches, no UVM_ERROR, and no UVM_FATAL.

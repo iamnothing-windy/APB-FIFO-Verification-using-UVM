@@ -1,0 +1,146 @@
+APB FIFO UVM Verification Plan
+==============================
+
+1. Objective
+------------
+This plan verifies the APB FIFO slave RTL using a UVM testbench. The goal is to prove that the DUT correctly handles APB read/write transfers, FIFO push/pop ordering, FIFO status/count reporting, boundary conditions, and error responses.
+
+The plan is not only a list of tests. It is a traceability document that connects:
+
+- Design feature to be verified.
+- Stimulus used to exercise that feature.
+- Checker used to decide pass/fail.
+- Coverage point used to show the feature was exercised.
+- Result artifact used as evidence.
+
+2. DUT Scope
+------------
+- DUT file: rtl/apb_fifo_slave.sv
+- Bus: APB-like slave interface
+- Interface file: tb/apb_if.sv
+- Data width: DWIDTH = 8
+- Address width: AWIDTH = 4
+- FIFO depth: FIFO_DEPTH = 8
+
+3. Register Map
+---------------
++---------+--------+----------+--------------------------------------------------+
+| Address | Name   | Access   | Expected behavior                                |
++---------+--------+----------+--------------------------------------------------+
+| 0x0     | DATA   | R/W      | Write pushes data. Read pops oldest FIFO data.   |
+| 0x4     | STATUS | Read-only| Bit 0 = empty, bit 1 = full.                     |
+| 0x8     | COUNT  | Read-only| Returns current FIFO occupancy.                  |
+| Others  | N/A    | Invalid  | Read/write returns PSLVERR.                      |
++---------+--------+----------+--------------------------------------------------+
+
+4. Feature List
+---------------
++------+--------------------------------------+----------------------------------------------+
+| ID   | Feature                              | Verification intent                          |
++------+--------------------------------------+----------------------------------------------+
+| F01  | Reset/default state                  | FIFO starts empty, COUNT=0, STATUS empty=1.  |
+| F02  | APB write to DATA                    | Valid write pushes data into FIFO.           |
+| F03  | APB read from DATA                   | Valid read pops data in FIFO order.          |
+| F04  | FIFO ordering                        | First written value is first read value.     |
+| F05  | STATUS register                      | Empty/full bits reflect FIFO state.          |
+| F06  | COUNT register                       | COUNT reflects FIFO occupancy.               |
+| F07  | FIFO full boundary                   | FIFO accepts exactly FIFO_DEPTH items.       |
+| F08  | Overflow error                       | Write when full returns PSLVERR.             |
+| F09  | Underflow error                      | Read when empty returns PSLVERR and rdata=0. |
+| F10  | Pointer wrap-around                  | Read/write after wrap keeps FIFO order.      |
+| F11  | Read-only register protection        | Write STATUS/COUNT returns PSLVERR.          |
+| F12  | Invalid address handling             | Invalid reads/writes return PSLVERR.         |
+| F13  | Random mixed traffic                 | DUT remains correct under mixed operations.  |
+| F14  | APB protocol sequencing              | Setup/access phase rules are obeyed.         |
++------+--------------------------------------+----------------------------------------------+
+
+5. Testcase Traceability
+------------------------
+Detailed testcase stimulus and expected results are in docs/testcase_matrix.txt.
+
++---------+--------------------------------+------------------------------+
+| TC ID   | UVM test/sequence              | Features covered             |
++---------+--------------------------------+------------------------------+
+| TC_RESET| apb_fifo_reset_check_sequence  | F01, F05, F06, F14           |
+| TC_BASIC| apb_fifo_basic_sequence        | F02, F03, F04, F05, F06, F14 |
+| TC_FULL | apb_fifo_full_overflow_sequence| F02, F05, F06, F07, F08      |
+| TC_UNDER| apb_fifo_underflow_sequence    | F09                          |
+| TC_WRAP | apb_fifo_wrap_sequence         | F02, F03, F04, F10           |
+| TC_RO   | apb_fifo_register_sequence     | F11                          |
+| TC_INV  | apb_fifo_invalid_addr_sequence | F12                          |
+| TC_RAND | apb_fifo_random_sequence       | F02-F13 mixed                |
+| TC_REG  | apb_fifo_full_regression_test  | F01-F14                      |
++---------+--------------------------------+------------------------------+
+
+6. UVM Environment
+------------------
++----------------+----------------------------------------------+
+| Component      | Responsibility                               |
++----------------+----------------------------------------------+
+| apb_trans      | APB transaction item: cmd, addr, data, rdata. |
+| apb_sequence   | Directed and random stimulus generation.      |
+| apb_sequencer  | Sends transactions to the driver.             |
+| apb_driver     | Drives APB setup/access cycles to the DUT.    |
+| apb_monitor    | Samples completed APB transfers.              |
+| apb_scoreboard | Independent FIFO reference model and checks.  |
+| apb_coverage   | Functional coverage collection.               |
+| apb_env        | Connects agent, scoreboard, and coverage.     |
++----------------+----------------------------------------------+
+
+7. Checking Strategy
+--------------------
+The run is self-checking. Pass/fail is not decided by manually reading every APB log line.
+
+- Interface assertions check APB protocol sequencing rules.
+- Monitor publishes completed transfers only after the APB access phase.
+- Scoreboard maintains an independent expected_fifo queue.
+- On valid DATA writes, scoreboard pushes expected data.
+- On valid DATA reads, scoreboard pops expected data and compares with PRDATA.
+- On STATUS reads, scoreboard computes expected empty/full bits.
+- On COUNT reads, scoreboard compares against expected_fifo.size().
+- On overflow, underflow, read-only writes, and invalid addresses, scoreboard expects PSLVERR.
+
+8. Coverage Strategy
+--------------------
++-------------------+----------------------------------------------------+
+| Coverage item     | Intent                                             |
++-------------------+----------------------------------------------------+
+| cmd_cp            | Both APB_READ and APB_WRITE are exercised.         |
+| addr_cp           | DATA, STATUS, COUNT, and invalid addresses hit.    |
+| slverr_cp         | Both normal and error responses are observed.      |
+| count_cp          | Empty, partial, and full FIFO states are observed. |
+| event_cp          | Normal, overflow, underflow, invalid, RO-write.    |
+| cmd_addr_cross    | Read/write combinations across address classes.    |
+| error_event_cross | Error response aligns with negative scenarios.     |
++-------------------+----------------------------------------------------+
+
+9. Regression Strategy
+----------------------
+Default regression test:
+
+apb_fifo_full_regression_test
+
+This regression runs reset, basic FIFO traffic, full/overflow, underflow, pointer wrap-around, read-only register writes, invalid-address accesses, and random mixed traffic.
+
+10. Pass/Fail Criteria
+----------------------
+The regression is PASS only when all of these are true:
+
+- UVM_ERROR count is 0.
+- UVM_FATAL count is 0.
+- Scoreboard prints: Scoreboard completed with no mismatches.
+- Expected negative tests return PSLVERR.
+- No APB protocol assertion fails.
+
+11. Current Result Evidence
+---------------------------
+- docs/eda_playground_xcelium_result.txt records the passing EDA Playground/Xcelium run.
+- The recorded run used apb_fifo_full_regression_test.
+- The recorded result has UVM_ERROR=0 and UVM_FATAL=0.
+- The scoreboard reported no mismatches.
+
+12. Known Notes
+---------------
+- Xcelium may print $unit_0x... for compilation-unit scope. This is not a DUT block and not a failure.
+- Xcelium may warn about #1step in clocking blocks. This is a timing precision warning, not a functional failure.
+- Details are documented in docs/xcelium_log_notes.txt.

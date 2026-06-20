@@ -1,0 +1,72 @@
+APB FIFO UVM Verification Flow
+==============================
+
+Repository Layout
+-----------------
+- rtl/: RTL design under verification.
+- tb/: top-level testbench and APB interface.
+- tb/uvm/: UVM transaction, sequences, driver, monitor, agent, env, scoreboard, coverage, and tests.
+- include/: shared macro definitions and address constants.
+- sim/: simulator filelist for the multi-file repo layout.
+- eda_playground/: two paste-ready files for EDA Playground.
+- docs/: plan, flow, simulator notes, and result artifacts.
+
+Compile Order
+-------------
+The multi-file compile order is defined in sim/filelist.f:
+
+1. include directories
+2. tb/apb_if.sv
+3. rtl/apb_fifo_slave.sv
+4. tb/uvm/apb_fifo_pkg.sv
+5. tb/top.sv
+
+Default Test Startup
+--------------------
+- tb/top.sv creates the APB interface and DUT instance.
+- tb/top.sv stores the virtual interface into uvm_config_db.
+- If +UVM_TESTNAME is not provided, tb/top.sv runs apb_fifo_full_regression_test.
+- A timeout fatal protects against a hung simulation.
+
+UVM Runtime Flow
+----------------
+1. Test creates apb_env.
+2. Env creates apb_agent, apb_scoreboard, and apb_coverage.
+3. Agent creates sequencer, driver, and monitor.
+4. Sequence generates apb_trans items.
+5. Sequencer sends items to driver.
+6. Driver drives APB setup/access cycles through apb_if.
+7. DUT responds with PRDATA, PREADY, and PSLVERR.
+8. Monitor observes completed APB transfers.
+9. Monitor broadcasts transactions to scoreboard and coverage.
+10. Scoreboard compares DUT behavior against an independent FIFO model.
+
+Local Run Examples
+------------------
+VCS example:
+
+vcs -sverilog -ntb_opts uvm -f sim/filelist.f -top top -R
+
+Xcelium example:
+
+xrun -sv -uvm -f sim/filelist.f -top top +UVM_TESTNAME=apb_fifo_full_regression_test -R
+
+To save a local text result artifact, run the simulator command and pipe stdout to a txt file, for example:
+
+xrun -sv -uvm -f sim/filelist.f -top top +UVM_TESTNAME=apb_fifo_full_regression_test -R | tee docs/local_xcelium_result.txt
+
+EDA Playground Flow
+-------------------
+1. Open https://edaplayground.com.
+2. Paste eda_playground/edaplayground_design.sv into the Design pane.
+3. Paste eda_playground/edaplayground_testbench.sv into the Testbench pane.
+4. Select a SystemVerilog simulator with UVM 1.2 support, such as Cadence Xcelium.
+5. Set top module to top if the playground asks for it.
+6. Run the simulation.
+7. Confirm the transcript ends with no UVM_ERROR, no UVM_FATAL, and the scoreboard no-mismatch message.
+
+Expected Passing End State
+--------------------------
+- Scoreboard completed with no mismatches.
+- UVM_ERROR : 0
+- UVM_FATAL : 0
