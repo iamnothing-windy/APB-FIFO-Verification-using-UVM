@@ -1,6 +1,10 @@
 APB FIFO UVM Architecture
 =========================
 
+Block diagram image
+-------------------
+- docs/uvm_architecture_block.svg
+
 1. Component Topology
 ---------------------
 

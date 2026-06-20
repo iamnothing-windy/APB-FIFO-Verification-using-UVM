@@ -1,0 +1,94 @@
+EDA Playground Version vs Repository Version
+============================================
+
+Short Answer
+------------
+The EDA Playground version and the repository version verify the same APB FIFO behavior with the same intended UVM flow. They are different in file organization and compile flow, not in verification intent.
+
+The repository version is the clean multi-file project layout. The EDA Playground version is a paste-ready flattened layout made for the two-pane EDA Playground interface.
+
+Why Two Versions Exist
+----------------------
+EDA Playground is easiest to use when the design and testbench are pasted into two large files:
+
+- Design pane: RTL design code.
+- Testbench pane: interface, UVM package/classes, top module, and default test startup.
+
+The normal repository layout is better for real development because each UVM component has its own file and the compile order is controlled by sim/filelist.f.
+
+Repository Version
+------------------
+Main files:
+
+- include/defines.svh
+- rtl/apb_fifo_slave.sv
+- tb/apb_if.sv
+- tb/top.sv
+- tb/uvm/apb_fifo_pkg.sv
+- tb/uvm/apb_trans.sv
+- tb/uvm/apb_sequence.sv
+- tb/uvm/apb_driver.sv
+- tb/uvm/apb_monitor.sv
+- tb/uvm/apb_scoreboard.sv
+- tb/uvm/apb_coverage.sv
+- tb/uvm/apb_agent.sv
+- tb/uvm/apb_env.sv
+- tb/uvm/apb_test.sv
+
+Compile file:
+
+- sim/filelist.f
+
+Use this version when developing locally, reviewing source code, adding tests, or maintaining the project.
+
+EDA Playground Version
+----------------------
+Main files:
+
+- eda_playground/edaplayground_design.sv
+- eda_playground/edaplayground_testbench.sv
+
+What is packed into edaplayground_design.sv:
+
+- defines/macros needed by the RTL
+- apb_fifo_slave RTL
+
+What is packed into edaplayground_testbench.sv:
+
+- defines/macros needed by the testbench
+- apb_if interface
+- apb_fifo_pkg package
+- UVM transaction class
+- UVM sequences
+- driver, monitor, sequencer, agent, env
+- scoreboard
+- coverage collector
+- tests
+- top module
+
+Use this version when running on EDA Playground, where uploading and compiling many separate files is inconvenient.
+
+Behavioral Differences
+----------------------
++----------------------+----------------------------+----------------------------+
+| Item                 | Repository version         | EDA Playground version     |
++----------------------+----------------------------+----------------------------+
+| DUT behavior         | Same APB FIFO behavior     | Same APB FIFO behavior     |
+| Main regression      | apb_fifo_full_regression   | apb_fifo_full_regression   |
+| Scoreboard intent    | Independent FIFO model     | Independent FIFO model     |
+| Coverage intent      | Same functional coverage   | Same functional coverage   |
+| File structure       | Multi-file clean layout    | Flattened two-file layout  |
+| Compile method       | sim/filelist.f             | EDA Design/Testbench panes |
+| Include handling     | Uses include directories   | Macros/classes inlined     |
+| Best use             | Development/maintenance    | Online demo/proof run      |
++----------------------+----------------------------+----------------------------+
+
+Important Notes
+---------------
+- The EDA Playground version may print a simulator generated $unit_0x... compile-unit name. That is normal and explained in docs/xcelium_log_notes.txt.
+- The EDA Playground version duplicates macro definitions in both panes with include guards. This avoids missing include-directory issues on EDA Playground.
+- If source changes are made in the repository version, the EDA Playground files should be regenerated or manually updated so the online demo stays aligned.
+
+Conclusion
+----------
+The repository version is the source-of-truth project structure. The EDA Playground version is the demonstration/run artifact prepared from the same design and verification environment so it can be pasted and executed online.

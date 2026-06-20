@@ -58,6 +58,7 @@ Giai thich ngan:
 Co the lay so do chi tiet tu:
 
 - README.md, muc UVM Architecture
+- docs/uvm_architecture_block.svg
 - docs/uvm_architecture.txt
 
 5. Verification Plan
@@ -177,5 +178,7 @@ Nen dua cac file/chung cu:
 - Coverage: tb/uvm/apb_coverage.sv
 - Verification plan: docs/verification_plan.txt
 - Testcase matrix: docs/testcase_matrix.txt
+- UVM block diagram: docs/uvm_architecture_block.svg
 - UVM architecture: docs/uvm_architecture.txt
+- EDA vs repo layout: docs/eda_vs_repo_layout.txt
 - EDA result artifact: docs/eda_playground_xcelium_result.txt

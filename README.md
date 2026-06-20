@@ -30,6 +30,7 @@ The project also includes EDA Playground-ready files and text artifacts for veri
 |-- sim/                 # Multi-file simulator filelist
 |-- eda_playground/      # Paste-ready EDA Playground version
 |-- docs/                # Verification plan, testcase matrix, flow, and result artifacts
+|   `-- uvm_architecture_block.svg
 |-- .gitignore
 `-- README.md
 ```
@@ -45,26 +46,7 @@ The project also includes EDA Playground-ready files and text artifacts for veri
 
 ## UVM Architecture
 
-```mermaid
-flowchart LR
-  TEST["apb_fifo_full_regression_test"] --> SEQ["apb_fifo_full_regression_sequence"]
-  SEQ --> SQR["apb_sequencer"]
-  SQR --> DRV["apb_driver"]
-  DRV --> VIF["virtual apb_if"]
-  VIF --> DUT["apb_fifo_slave DUT"]
-
-  DUT --> VIF
-  VIF --> MON["apb_monitor"]
-  MON --> SB["apb_scoreboard (independent FIFO model)"]
-  MON --> COV["apb_coverage (functional coverage)"]
-
-  ENV["apb_env"] --> AGENT["apb_agent"]
-  AGENT --> SQR
-  AGENT --> DRV
-  AGENT --> MON
-  ENV --> SB
-  ENV --> COV
-```
+![APB FIFO UVM architecture block diagram](docs/uvm_architecture_block.svg)
 
 Transaction flow:
 
@@ -90,7 +72,9 @@ Key files:
 
 - `docs/verification_plan.txt`: feature-level verification plan and pass/fail criteria.
 - `docs/testcase_matrix.txt`: testcase IDs, stimulus, expected results, checkers, and coverage mapping.
+- `docs/uvm_architecture_block.svg`: block diagram image of the UVM testbench architecture.
 - `docs/uvm_architecture.txt`: text diagram of the UVM component topology and transaction flow.
+- `docs/eda_vs_repo_layout.txt`: explains how the EDA Playground version differs from the repo layout.
 - `docs/verification_flow.txt`: repository flow, compile order, local run flow, and EDA Playground flow.
 - `docs/verification_report_template.txt`: report/slide structure for presenting the project.
 - `docs/xcelium_log_notes.txt`: notes for Xcelium messages such as `$unit_0x...` and `#1step` warnings.
@@ -130,6 +114,8 @@ Use the paste-ready files instead of the multi-file repository layout:
 5. Run the simulation.
 
 The EDA Playground version runs `apb_fifo_full_regression_test` by default.
+
+The EDA version is functionally the same verification demo but flattened into two paste-ready files. The normal repo version remains the cleaner source-of-truth multi-file layout. See `docs/eda_vs_repo_layout.txt` for the full comparison.
 
 ## Expected Passing Result
 
